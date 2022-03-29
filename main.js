@@ -839,6 +839,7 @@ function getsmappeedata(topicarray, messageJ) {
         for (var i = 0; i < inputchannels.length; i++) {
           adapter.setState('Servicelocations.' + topicarray[1] + '.Power.CT_Input.' + messageJ.channelPowers[i].ctInput + ".phasePower", parseInt(messageJ.channelPowers[i].power), true);
           adapter.setState('Servicelocations.' + topicarray[1] + '.Power.CT_Input.' + messageJ.channelPowers[i].ctInput + ".phaseId", messageJ.channelPowers[i].phaseId, true);
+          adapter.setState('Servicelocations.' + topicarray[1] + '.Power.CT_Input.' + messageJ.channelPowers[i].ctInput + ".phaseCurrent", messageJ.channelPowers[i].current, true);
         }
         break;
 
