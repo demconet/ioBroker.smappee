@@ -365,6 +365,7 @@ function getsmappeeconfig(topicarray, messageJ) {
               },
               native: {}
             });
+          }
           adapter.setObjectNotExists('Servicelocations.' + topicarray[1] + '.Power.CT_Input.' + messageJ.channelPowers[cleng].ctInput + ".phaseId", {
             type: 'state',
             common: {
