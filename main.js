@@ -365,20 +365,6 @@ function getsmappeeconfig(topicarray, messageJ) {
               },
               native: {}
             });
-            adapter.setObjectNotExists('Servicelocations.' + topicarray[1] + '.Power.CT_Input.' + messageJ.channelPowers[cleng].ctInput + ".phasePower", {
-              type: 'state',
-              common: {
-                name: 'phasePower',
-                desc: 'PAC on phase',
-                type: 'number',
-                role: "value.phasePower",
-                read: true,
-                write: false,
-                unit: "W"
-              },
-              native: {}
-            });
-          }
           adapter.setObjectNotExists('Servicelocations.' + topicarray[1] + '.Power.CT_Input.' + messageJ.channelPowers[cleng].ctInput + ".phaseId", {
             type: 'state',
             common: {
@@ -401,6 +387,19 @@ function getsmappeeconfig(topicarray, messageJ) {
               read: true,
               write: false,
               unit: "W"
+            },
+            native: {}
+          });
+          adapter.setObjectNotExists('Servicelocations.' + topicarray[1] + '.Power.CT_Input.' + messageJ.channelPowers[cleng].ctInput + ".phaseCurrent", {
+            type: 'state',
+            common: {
+              name: 'phaseCurrent',
+              desc: 'Current on phase',
+              type: 'number',
+              role: "value.phaseCurrent",
+              read: true,
+              write: false,
+              unit: "A"
             },
             native: {}
           });
