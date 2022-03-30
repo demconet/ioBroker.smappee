@@ -1007,7 +1007,7 @@ function getsmappeedata(topicarray, messageJ) {
         adapter.setState('Servicelocations.' + topicarray[1] + '.Power.alwaysOn', (parseInt(messageJ.intervalDatas[0].alwaysOn)) / 1000, true);
         adapter.setState('Servicelocations.' + topicarray[1] + '.Power.averageRMSVoltage', (parseInt(messageJ.intervalDatas[0].averageRMSVoltage)) / 10, true);
         for (var i = 0; i < inputchannels.length; i++) {
-          adapter.setState('Servicelocations.' + topicarray[1] + '.Power.CT_Input.' + messageJ.intervalDatas[0].channelIntervalDatas[i].ctInput + ".phaseAverageRMSCurrent", parseInt(messageJ.intervalDatas[0].channelIntervalDatas[i].averageRMSCurrent), true);
+          adapter.setState('Servicelocations.' + topicarray[1] + '.Power.CT_Input.' + messageJ.intervalDatas[0].channelIntervalDatas[i].ctInput + ".phaseAverageRMSCurrent", parseInt(messageJ.intervalDatas[0].channelIntervalDatas[i].averageRMSCurrent) / 100, true);
           adapter.setState('Servicelocations.' + topicarray[1] + '.Power.CT_Input.' + messageJ.intervalDatas[0].channelIntervalDatas[i].ctInput + ".phaseAverageImportRMSActivePower", parseInt(messageJ.intervalDatas[0].channelIntervalDatas[i].averageImportRMSActivePower), true);
           adapter.setState('Servicelocations.' + topicarray[1] + '.Power.CT_Input.' + messageJ.intervalDatas[0].channelIntervalDatas[i].ctInput + ".phaseAverageExportRMSActivePower", parseInt(messageJ.intervalDatas[0].channelIntervalDatas[i].averageExportRMSActivePower), true);
           adapter.setState('Servicelocations.' + topicarray[1] + '.Power.CT_Input.' + messageJ.intervalDatas[0].channelIntervalDatas[i].ctInput + ".phaseAverageRMSApparentPower", parseInt(messageJ.intervalDatas[0].channelIntervalDatas[i].averageRMSApparentPower), true);
