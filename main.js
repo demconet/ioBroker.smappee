@@ -1006,15 +1006,13 @@ function getsmappeedata(topicarray, messageJ) {
       case "aggregated":
         adapter.setState('Servicelocations.' + topicarray[1] + '.Power.alwaysOn', (parseInt(messageJ.intervalDatas[0].alwaysOn)) / 1000, true);
         adapter.setState('Servicelocations.' + topicarray[1] + '.Power.averageRMSVoltage', (parseInt(messageJ.intervalDatas[0].averageRMSVoltage)) / 10, true);
-
         for (var i = 0; i < inputchannels.length; i++) {
-          adapter.setState('Servicelocations.' + topicarray[1] + '.Power.CT_Input.' + messageJ.channelIntervalDatas[i].ctInput + ".phaseAverageRMSCurrent", parseInt(messageJ.channelIntervalDatas[i].averageRMSCurrent), true);
-          adapter.setState('Servicelocations.' + topicarray[1] + '.Power.CT_Input.' + messageJ.channelIntervalDatas[i].ctInput + ".phaseAverageImportRMSActivePower", parseInt(messageJ.channelIntervalDatas[i].averageImportRMSActivePower), true);
-          adapter.setState('Servicelocations.' + topicarray[1] + '.Power.CT_Input.' + messageJ.channelIntervalDatas[i].ctInput + ".phaseAverageExportRMSActivePower", parseInt(messageJ.channelIntervalDatas[i].averageExportRMSActivePower), true);
-          adapter.setState('Servicelocations.' + topicarray[1] + '.Power.CT_Input.' + messageJ.channelIntervalDatas[i].ctInput + ".phaseAverageRMSApparentPower", parseInt(messageJ.channelIntervalDatas[i].averageRMSApparentPower), true);
-          adapter.setState('Servicelocations.' + topicarray[1] + '.Power.CT_Input.' + messageJ.channelIntervalDatas[i].ctInput + ".phaseAverageRMSReactivePower", parseInt(messageJ.channelIntervalDatas[i].averageRMSReactivePower), true);
-          adapter.setState('Servicelocations.' + topicarray[1] + '.Power.CT_Input.' + messageJ.channelIntervalDatas[i].ctInput + ".phaseAveragePowerfactor", parseInt(messageJ.channelIntervalDatas[i].averagePowerfactor), true);
-
+          adapter.setState('Servicelocations.' + topicarray[1] + '.Power.CT_Input.' + messageJ.intervalDatas[0].channelIntervalDatas[i].ctInput + ".phaseAverageRMSCurrent", parseInt(messageJ.intervalDatas[0].channelIntervalDatas[i].averageRMSCurrent), true);
+          adapter.setState('Servicelocations.' + topicarray[1] + '.Power.CT_Input.' + messageJ.intervalDatas[0].channelIntervalDatas[i].ctInput + ".phaseAverageImportRMSActivePower", parseInt(messageJ.intervalDatas[0].channelIntervalDatas[i].averageImportRMSActivePower), true);
+          adapter.setState('Servicelocations.' + topicarray[1] + '.Power.CT_Input.' + messageJ.intervalDatas[0].channelIntervalDatas[i].ctInput + ".phaseAverageExportRMSActivePower", parseInt(messageJ.intervalDatas[0].channelIntervalDatas[i].averageExportRMSActivePower), true);
+          adapter.setState('Servicelocations.' + topicarray[1] + '.Power.CT_Input.' + messageJ.intervalDatas[0].channelIntervalDatas[i].ctInput + ".phaseAverageRMSApparentPower", parseInt(messageJ.intervalDatas[0].channelIntervalDatas[i].averageRMSApparentPower), true);
+          adapter.setState('Servicelocations.' + topicarray[1] + '.Power.CT_Input.' + messageJ.intervalDatas[0].channelIntervalDatas[i].ctInput + ".phaseAverageRMSReactivePower", parseInt(messageJ.intervalDatas[0].channelIntervalDatas[i].averageRMSReactivePower), true);
+          adapter.setState('Servicelocations.' + topicarray[1] + '.Power.CT_Input.' + messageJ.intervalDatas[0].channelIntervalDatas[i].ctInput + ".phaseAveragePowerfactor", parseInt(messageJ.intervalDatas[0].channelIntervalDatas[i].averagePowerfactor), true);
         }
 
         break;
