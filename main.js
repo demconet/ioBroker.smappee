@@ -279,6 +279,19 @@ function getsmappeeconfig(topicarray, messageJ) {
           },
           native: {}
         });
+        adapter.setObjectNotExists('Servicelocations.' + topicarray[1] + '.Power.totalReactivePower', {
+          type: 'state',
+          common: {
+            name: 'totalReactivePower',
+            desc: 'Total Reactive Power',
+            type: 'number',
+            role: "value.totalReactivePower",
+            read: true,
+            write: false,
+            unit: "var"
+          },
+          native: {}
+        });
         adapter.setObjectNotExists('Servicelocations.' + topicarray[1] + '.Power.voltage', {
           type: 'state',
           common: {
@@ -302,6 +315,19 @@ function getsmappeeconfig(topicarray, messageJ) {
             read: true,
             write: false,
             unit: "W"
+          },
+          native: {}
+        });
+        adapter.setObjectNotExists('Servicelocations.' + topicarray[1] + '.Power.averageRMSVoltage', {
+          type: 'state',
+          common: {
+            name: 'averageRMSVoltage',
+            desc: 'Average RMS voltage',
+            type: 'number',
+            role: "value.averageRMSVoltage",
+            read: true,
+            write: false,
+            unit: "V"
           },
           native: {}
         });
@@ -401,6 +427,84 @@ function getsmappeeconfig(topicarray, messageJ) {
               read: true,
               write: false,
               unit: "A"
+            },
+            native: {}
+          });
+          adapter.setObjectNotExists('Servicelocations.' + topicarray[1] + '.Power.CT_Input.' + messageJ.channelPowers[cleng].ctInput + ".phaseAverageRMSCurrent", {
+            type: 'state',
+            common: {
+              name: 'phaseAverageRMSCurrent',
+              desc: 'Averge current on phase',
+              type: 'number',
+              role: "value.phaseAverageRMSCurrent",
+              read: true,
+              write: false,
+              unit: "A"
+            },
+            native: {}
+          });
+          adapter.setObjectNotExists('Servicelocations.' + topicarray[1] + '.Power.CT_Input.' + messageJ.channelPowers[cleng].ctInput + ".phaseAverageImportRMSActivePower", {
+            type: 'state',
+            common: {
+              name: 'phaseAverageImportRMSActivePower',
+              desc: 'Average import RMS active power on phase',
+              type: 'number',
+              role: "value.phaseAverageImportRMSActivePower",
+              read: true,
+              write: false,
+              unit: "W"
+            },
+            native: {}
+          });
+          adapter.setObjectNotExists('Servicelocations.' + topicarray[1] + '.Power.CT_Input.' + messageJ.channelPowers[cleng].ctInput + ".phaseAverageExportRMSActivePower", {
+            type: 'state',
+            common: {
+              name: 'phaseAverageExportRMSActivePower',
+              desc: 'Average export RMS active power on phase',
+              type: 'number',
+              role: "value.phaseAverageExportRMSActivePower",
+              read: true,
+              write: false,
+              unit: "W"
+            },
+            native: {}
+          });
+          adapter.setObjectNotExists('Servicelocations.' + topicarray[1] + '.Power.CT_Input.' + messageJ.channelPowers[cleng].ctInput + ".phaseAverageRMSApparentPower", {
+            type: 'state',
+            common: {
+              name: 'phaseAverageRMSApparentPower',
+              desc: 'Average RMS apparent power on phase',
+              type: 'number',
+              role: "value.phaseAverageRMSApparentPower",
+              read: true,
+              write: false,
+              unit: "VA"
+            },
+            native: {}
+          });
+          adapter.setObjectNotExists('Servicelocations.' + topicarray[1] + '.Power.CT_Input.' + messageJ.channelPowers[cleng].ctInput + ".phaseAverageRMSReactivePower", {
+            type: 'state',
+            common: {
+              name: 'phaseAverageRMSReactivePower',
+              desc: 'Average RMS reactive power on phase',
+              type: 'number',
+              role: "value.phaseAverageRMSReactivePower",
+              read: true,
+              write: false,
+              unit: "var"
+            },
+            native: {}
+          });
+          adapter.setObjectNotExists('Servicelocations.' + topicarray[1] + '.Power.CT_Input.' + messageJ.channelPowers[cleng].ctInput + ".phaseAveragePowerfactor", {
+            type: 'state',
+            common: {
+              name: 'phaseAveragePowerfactor',
+              desc: 'Average power factor on phase (cosfi)',
+              type: 'number',
+              role: "value.phaseAveragePowerfactor",
+              read: true,
+              write: false,
+              unit: ""
             },
             native: {}
           });
@@ -764,6 +868,7 @@ function getsmappeeconfig(topicarray, messageJ) {
       case "aggregated":
         configtopics.push("aggregated");
         adapter.log.debug("Topic aggregated to be developed");
+        // Aggregated topics all added at Realtime
         adapter.log.debug("Anzahl Topics bearbeitet: " + configtopics.length);
 
         break;
@@ -816,6 +921,7 @@ function getsmappeedata(topicarray, messageJ) {
     switch (topicarray[2]) {
       case "realtime":
         adapter.setState('Servicelocations.' + topicarray[1] + '.Power.totalPower', parseInt(messageJ.totalPower), true);
+        adapter.setState('Servicelocations.' + topicarray[1] + '.Power.totalReactivePower', parseInt(messageJ.totalReactivePower), true);
         adapter.setState('Servicelocations.' + topicarray[1] + '.Power.voltage', parseInt(messageJ.voltages[0].voltage), true);
         adapter.getObject('Servicelocations.' + topicarray[1] + '.Power.importEnergy', function(err, obj) {
           if (obj) {
@@ -840,7 +946,7 @@ function getsmappeedata(topicarray, messageJ) {
         for (var i = 0; i < inputchannels.length; i++) {
           adapter.setState('Servicelocations.' + topicarray[1] + '.Power.CT_Input.' + messageJ.channelPowers[i].ctInput + ".phasePower", parseInt(messageJ.channelPowers[i].power), true);
           adapter.setState('Servicelocations.' + topicarray[1] + '.Power.CT_Input.' + messageJ.channelPowers[i].ctInput + ".phaseId", messageJ.channelPowers[i].phaseId, true);
-          adapter.setState('Servicelocations.' + topicarray[1] + '.Power.CT_Input.' + messageJ.channelPowers[i].ctInput + ".phaseCurrent", messageJ.channelPowers[i].current, true);
+          adapter.setState('Servicelocations.' + topicarray[1] + '.Power.CT_Input.' + messageJ.channelPowers[i].ctInput + ".phaseCurrent", parseInt(messageJ.channelPowers[i].current), true);
         }
         break;
 
@@ -899,6 +1005,17 @@ function getsmappeedata(topicarray, messageJ) {
 
       case "aggregated":
         adapter.setState('Servicelocations.' + topicarray[1] + '.Power.alwaysOn', (parseInt(messageJ.intervalDatas[0].alwaysOn)) / 1000, true);
+        adapter.setState('Servicelocations.' + topicarray[1] + '.Power.averageRMSVoltage', parseInt(messageJ.intervalDatas[0].averageRMSVoltage), true);
+
+        for (var i = 0; i < inputchannels.length; i++) {
+          adapter.setState('Servicelocations.' + topicarray[1] + '.Power.CT_Input.' + messageJ.channelPowers[i].ctInput + ".phaseAverageRMSCurrent", parseInt(messageJ.channelPowers[i].averageRMSCurrent), true);
+          adapter.setState('Servicelocations.' + topicarray[1] + '.Power.CT_Input.' + messageJ.channelPowers[i].ctInput + ".phaseAverageImportRMSActivePower", parseInt(messageJ.channelPowers[i].averageImportRMSActivePower), true);
+          adapter.setState('Servicelocations.' + topicarray[1] + '.Power.CT_Input.' + messageJ.channelPowers[i].ctInput + ".phaseAverageExportRMSActivePower", parseInt(messageJ.channelPowers[i].averageExportRMSActivePower), true);
+          adapter.setState('Servicelocations.' + topicarray[1] + '.Power.CT_Input.' + messageJ.channelPowers[i].ctInput + ".phaseAverageRMSApparentPower", parseInt(messageJ.channelPowers[i].averageRMSApparentPower), true);
+          adapter.setState('Servicelocations.' + topicarray[1] + '.Power.CT_Input.' + messageJ.channelPowers[i].ctInput + ".phaseAverageRMSReactivePower", parseInt(messageJ.channelPowers[i].averageRMSReactivePower), true);
+          adapter.setState('Servicelocations.' + topicarray[1] + '.Power.CT_Input.' + messageJ.channelPowers[i].ctInput + ".phaseAveragePowerfactor", parseInt(messageJ.channelPowers[i].averagePowerfactor), true);
+
+        }
 
         break;
 
